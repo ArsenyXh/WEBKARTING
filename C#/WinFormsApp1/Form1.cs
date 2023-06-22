@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinFormsApp1.classes;
+using System.Net.Mail;
+using System.Net;
 
 namespace WinFormsApp1
 {
@@ -20,6 +22,9 @@ namespace WinFormsApp1
             InitializeComponent();
             context = new context();
         }
+
+       
+
         public void AddApplications()
         {
             listView1.Items.Clear();
@@ -47,8 +52,8 @@ namespace WinFormsApp1
         {
             if (listView1.SelectedItems.Count != 0)
             {
-                string W = listView1.Items[(listView1.SelectedItems[0].Index)].SubItems[0].Text;
-                var application = context.application.Find(int.Parse(W));
+                string selectedId = listView1.Items[(listView1.SelectedItems[0].Index)].SubItems[0].Text;
+                var application = context.application.Find(int.Parse(selectedId));
                 application.status = "Принята";
                 application.idworker = Convert.ToInt32(numericUpDown1.Value);
                 application.idkart = Convert.ToInt32(numericUpDown2.Value);
@@ -56,6 +61,27 @@ namespace WinFormsApp1
                 context.SaveChanges();
                 MessageBox.Show("Заявка принята");
                 AddApplications();
+                try
+                {
+                    // Создание SmtpClient и MailMessage
+                    SmtpClient smtpClient = new SmtpClient("smtp.mail.ru", 2525);
+                    smtpClient.UseDefaultCredentials = false;
+                    smtpClient.Credentials = new NetworkCredential("probnikkarting43@mail.ru", "XHv7SHxdXdRgTfES3wAb");
+                    smtpClient.EnableSsl = true;
+
+                    MailMessage mailMessage = new MailMessage();
+                    mailMessage.From = new MailAddress("probnikkarting43@mail.ru");
+                    mailMessage.To.Add(new MailAddress("kartingcenter43@mail.ru"));
+                    mailMessage.Subject = "Заявка";
+                    mailMessage.Body = "Ваша заявка принята, приходите в " + application.timestart.ToString() + " в наш картинг-центр.";
+
+                    // Отправка сообщения
+                    smtpClient.Send(mailMessage);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка при отправке сообщения: " + ex.Message);
+                }
             }
             else
             {
