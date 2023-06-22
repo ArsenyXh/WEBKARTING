@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="479.0" prefWidth="993.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.contrl">
+   <children>
+      <TabPane layoutX="1.0" prefHeight="474.0" prefWidth="992.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Заявки">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="511.0" prefWidth="985.0">
+                     <children>
+                        <Button layoutX="847.0" layoutY="14.0" mnemonicParsing="false" onAction="#input" prefHeight="18.0" prefWidth="123.0" text="Вывести все заявки" />
+                        <TableView fx:id="tableApplications" layoutX="5.0" layoutY="6.0" prefHeight="416.0" prefWidth="824.0">
+                          <columns>
+                            <TableColumn fx:id="id" prefWidth="56.0" text="Номер" />
+                            <TableColumn fx:id="type" prefWidth="75.0" text="Тип" />
+                              <TableColumn fx:id="timestart" prefWidth="128.0" text="Время начала" />
+                              <TableColumn fx:id="timeend" prefWidth="132.0" text="Время конца" />
+                              <TableColumn fx:id="status" prefWidth="85.0" text="Статус" />
+                              <TableColumn fx:id="idkart" prefWidth="108.0" text="Номер карта" />
+                              <TableColumn fx:id="idequipment" prefWidth="128.0" text="Номер экипировки" />
+                              <TableColumn fx:id="idclient" prefWidth="112.0" text="Почта клиента" />
+                          </columns>
+                        </TableView>
+                        <Label fx:id="telephoneLabel" layoutX="848.0" layoutY="50.0" prefHeight="29.0" prefWidth="124.0" visible="false" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

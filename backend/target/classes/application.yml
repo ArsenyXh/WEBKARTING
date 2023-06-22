@@ -1,0 +1,17 @@
+security.jwt.token.secret-key: my-secret-key
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/kartingcenter
+    username: postgres
+    password: 123
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    hibernate:
+  sql:
+    init:
+      platform: postgres
+      mode: always

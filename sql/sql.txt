@@ -1,0 +1,44 @@
+CREATE TABLE karts (
+id integer primary key not null,
+type text not null);
+
+CREATE TABLE equipment (
+id integer primary key not null,
+type text not null);
+
+CREATE TABLE kartingcenters (
+id integer primary key not null,
+address text not null);
+
+CREATE TABLE clients (
+id integer primary key not null,
+first_name text not null,
+last_name text not null,
+login text not null,
+password text not null);
+
+CREATE TABLE workers (
+id integer primary key not null,
+role text not null,
+name text not null,
+surname text not null,
+telephone text not null,
+password text not null);
+
+CREATE TABLE application (
+id integer primary key not null,
+type text not null,
+timestart timestamp without time zone not null,
+timeend timestamp without time zone not null,
+price integer,
+status text not null,
+idclient text,
+idworker integer,
+idkart integer,
+idequipment integer,
+idcenter integer not null,
+CONSTRAINT fkclient FOREIGN KEY ( idclient ) REFERENCES clients( login ) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT fkworker FOREIGN KEY ( idworker ) REFERENCES workers( id ) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT fkkart FOREIGN KEY ( idkart ) REFERENCES karts( id ) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT fkequipment FOREIGN KEY ( idequipment ) REFERENCES equipment( id ) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT fkcenter FOREIGN KEY ( idcenter ) REFERENCES kartingcenters( id ) ON DELETE NO ACTION ON UPDATE CASCADE);
